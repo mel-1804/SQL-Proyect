@@ -6,7 +6,7 @@ class Pets(db.Model):
     __tablename__ = "pets"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    # animal_type_id = db.Column(db.Integer, nullable=False)
+    animal_type_id = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(50), nullable=False)
     age_months = db.Column(db.Integer, nullable=False)
     animal_type = db.Relationship("Animal_type", uselist=False)
@@ -52,8 +52,9 @@ class Ster_state(db.Model):
 
 class Animal_type(db.Model): 
     __tablename__ = "animal_type"
+    id = db.Column(db.Integer, primary_key=True)
     animal = db.Column(db.String(50), nullable=False)
-    id = db.Column(db.Integer, db.ForeignKey('pets.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
 
     def serialize(self):
         return {
