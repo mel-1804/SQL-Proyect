@@ -10,68 +10,108 @@ migrate = Migrate(app, db)
 CORS(app)
 
 
-#------------------------------------------INDEX
+#------------------------------------------HOME
 @app.route('/', methods = ['GET'])
 def home():
     return "Welcome"
 
+
 #------------------------------------------USERS
-@app.router('/createUser', methods=['POST'])
+@app.route('/createUser', methods=['POST'])
 def create_user():
 
   data= request.json
-  usuario = User()
+  user = User()
 
-  usuario.name = data['name']
-  usuario.lastname = data['lastname']
-  usuario.email = data['email']
-  usuario.password = data['password']
+  user.name = data['name']
+  user.lastname = data['lastname']
+  user.email = data['email']
+  user.password = data['password']
 
-  db.session.add(usuario)
+  db.session.add(user)
   db.session.commit()
 
-    return{
-      "message": "User created successfully",
-      "data": usuario.serialize()
-    }, 201
+  return{
+    "message": "User created successfully",
+    "data": user.serialize()
+  }, 201
+
 
 #--------------------------------------------PETS
-@app.router('/createPet', methods=['POST'])
+@app.route('/createPet', methods=['POST'])
 def create_pet():
 
   data= request.json
-  mascota = Pets()
+  pet = Pets()
 
-  mascota.name = data['name']
-  mascota.animal_type_id = data['animalTypeId']
-  mascota.gender = data['gender']
-  mascota.age_months = data['ageMonths']
+  pet.name = data['name']
+  pet.animal_type_id = data['animalTypeId']
+  pet.gender = data['gender']
+  pet.age_months = data['ageMonths']
 
-  db.session.add(mascota)
+  db.session.add(pet)
   db.session.commit()
 
-    return{
-      "message": "Pet created successfully",
-      "data": mascota.serialize()
-    }, 201
+  return{
+    "message": "Pet created successfully",
+    "data": pet.serialize()
+  }, 201
+
 
 #-----------------------------------LOCATIONS
-@app.router('/createLocation', methods=['POST'])
+@app.route('/createLocation', methods=['POST'])
 def create_location():
 
   data= request.json
-  locacion = Location()
+  location = Location()
 
-  locacion.region = data['region']
-  locacion.comuna = data['comuna']
+  location.region = data['region']
+  location.comuna = data['comuna']
   
-  db.session.add(locacion)
+  db.session.add(location)
   db.session.commit()
 
-    return{
-      "message": "Location created successfully",
-      "data": locacion.serialize()
-    }, 201
+  return{
+    "message": "Location created successfully",
+    "data": location.serialize()
+  }, 201
+
+
+#-----------------------------------ANIMAL TYPE
+@app.route('/createSterState', methods=['POST'])
+def create_sterilization_state():
+
+  data= request.json
+  ster_state = Ster_state()
+
+  ster_state.status = data['status']
+    
+  db.session.add(ster_state)
+  db.session.commit()
+
+  return{
+    "message": "sterilization state created successfully",
+    "data": ster_state.serialize()
+  }, 201
+
+
+#-----------------------------------ANIMAL TYPE
+@app.route('/createAnimalType', methods=['POST'])
+def create_animal_type():
+
+  data= request.json
+  animal_type = Animal_type()
+
+  animal_type.animal = data['animal']
+    
+  db.session.add(animal_type)
+  db.session.commit()
+
+  return{
+    "message": "animal type created successfully",
+    "data": animal_type.serialize()
+  }, 201
+
 
 
 if __name__ == "__main__":
