@@ -21,6 +21,7 @@ class Pets(db.Model):
             'ageMonths': self.age_months
         }
 
+
 class Location(db.Model):
     __tablename__ = "location"
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +36,7 @@ class Location(db.Model):
             'comuna': self.comuna,
             'petId': self.pet_id
         }
+
 
 class Ster_state(db.Model):
     __tablename__ = "sterilization_state"
@@ -78,8 +80,8 @@ class Favorites(db.Model):
             'locID': self.loc_id,
             'userID': self.user_id  
         }
+  
     
-
 class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
